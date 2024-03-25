@@ -36,8 +36,8 @@ exports.getOne = async (req, res) => {
 
 exports.addNew = async (req, res) => {
   try {
-    const { firstName, lastName, department } = req.body;
-    const newDepartment = new Department({ firstName, lastName, department });
+    const { name } = req.body;
+    const newDepartment = new Department({ name });
     await newDepartment.save();
     res.json({ message: 'OK' });
   }
@@ -47,11 +47,11 @@ exports.addNew = async (req, res) => {
 };
 
 exports.changeOne = async (req, res) => {
-  const { firstName, lastName, department } = req.body;
+  const { name } = req.body;
   try {
     const empl = await Department.findById(req.params.id);
     if(empl) {
-      await Department.updateOne({ _id: req.params.id }, { $set: { firstName, lastName, department } });
+      await Department.updateOne({ _id: req.params.id }, { $set: { name } });
       res.json({ message: 'OK', modifiedDepartment: empl});
     }
     else res.status(404).json({ message: 'Not found...' });
