@@ -4,10 +4,6 @@ const mongoose = require('mongoose');
 
 describe('Department', () => {
   
-  after(() => {
-    mongoose.models = {};
-  });
-  
   it('should throw an error if no "name" arg', async () => {
     const dep = new Department({});
     

@@ -4,10 +4,6 @@ const mongoose = require('mongoose');
 
 describe('Employee', () => {
 
-  after(() => {
-    mongoose.models = {};
-  });
-
   it('should not throw an error if args are okay', () => {
     const cases = ['John', 'Jane'];
     const department = 'Marketing';
