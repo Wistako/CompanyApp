@@ -5,11 +5,10 @@ const mongoose = require('mongoose');
 describe('Department', () => {
   
   it('should throw an error if no "name" arg', async () => {
-    const dep = new Department({});
+    const dep = new Department();
     
-    dep.validateSync(err => {
-      expect(err.errors.name).to.exist;
-    });
+    const validation = dep.validateSync()
+    expect(validation.errors.name).to.exist;
   });
 
   it('should throw an error if "name" is not a string', () => {
@@ -17,9 +16,8 @@ describe('Department', () => {
     for(let name of cases) {
       const dep = new Department({ name });
       
-      dep.validateSync(err => {
-        expect(err.errors.name).to.exist;
-      });
+      const validation = dep.validateSync()
+      expect(validation.errors.name).to.exist;
     }
   });
 
@@ -28,9 +26,8 @@ describe('Department', () => {
     for(let name of cases) {
       const dep = new Department({ name });
       
-      dep.validateSync(err => {
-        expect(err.errors.name).to.exist;
-      });
+      const validation = dep.validateSync();
+      expect(validation.errors.name).to.exist;
     }
   });
 
@@ -39,9 +36,9 @@ describe('Department', () => {
     for(let name of cases) {
       const dep = new Department({ name });
       
-      dep.validateSync(err => {
-        expect(err).to.not.exist;
-      });
+      const validation = dep.validateSync()
+      console.log(validation);
+      expect(validation).to.not.exist;
     }
   });
 
